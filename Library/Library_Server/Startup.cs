@@ -26,10 +26,7 @@ namespace Library_Server
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.AddControllers();
-            services.AddDbContext<LibraryContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("LibraryDb")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

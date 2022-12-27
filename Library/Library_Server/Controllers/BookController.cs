@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Library_Server.Controllers
 {
+    [Route("api/book")]
+    [ApiController]
     public class BookController : ControllerBase
     {
         [HttpGet]

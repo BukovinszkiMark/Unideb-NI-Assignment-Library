@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Library_Server.Controllers
 {
+    [Route("api/borrow")]
+    [ApiController]
     public class BorrowController : ControllerBase
     {
         [HttpGet]

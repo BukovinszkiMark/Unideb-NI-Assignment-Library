@@ -17,4 +17,8 @@
     <ProjectReference Include="..\Library_Common\Library_Common.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

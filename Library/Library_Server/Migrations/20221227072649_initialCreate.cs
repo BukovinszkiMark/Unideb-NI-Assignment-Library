@@ -11,7 +11,7 @@ namespace Library_Server.Migrations
                 name: "Books",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Title = table.Column<string>(nullable: true),
                     Writer = table.Column<string>(nullable: true),
@@ -27,10 +27,10 @@ namespace Library_Server.Migrations
                 name: "Borrows",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BookId = table.Column<int>(nullable: false),
-                    MemberId = table.Column<int>(nullable: false),
+                    BookId = table.Column<long>(nullable: false),
+                    MemberId = table.Column<long>(nullable: false),
                     BorrowDate = table.Column<DateTime>(nullable: false),
                     ReturnDate = table.Column<DateTime>(nullable: false)
                 },
@@ -43,7 +43,7 @@ namespace Library_Server.Migrations
                 name: "Members",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    Id = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(nullable: true),
                     Address = table.Column<string>(nullable: true),

@@ -18,7 +18,7 @@ namespace Library_Server.Repositories
             }
         }
 
-        public static Borrow GetBorrow(int id) 
+        public static Borrow GetBorrow(long id) 
         {
             using (var database = new LibraryContext())
             {

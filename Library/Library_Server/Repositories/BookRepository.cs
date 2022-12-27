@@ -17,7 +17,7 @@ namespace Library_Server.Repositories
             }
         }
 
-        public static Book GetBook(int id)
+        public static Book GetBook(long id)
         {
             using (var database = new LibraryContext())
             {

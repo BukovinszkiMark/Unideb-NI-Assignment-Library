@@ -18,7 +18,7 @@ namespace Library_Server.Repositories
             }
         }
 
-        public static Member GetMember(int id) 
+        public static Member GetMember(long id) 
         {
             using (var database = new LibraryContext())
             {

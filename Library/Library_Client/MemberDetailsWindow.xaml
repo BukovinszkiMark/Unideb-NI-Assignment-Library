@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Library_Client"
         mc:Ignorable="d"
-        Title="Member Details Window" Height="300" Width="400">
+        Title="Member Details Window" Height="300" Width="500">
     <Grid>
 
         <Grid.RowDefinitions>
@@ -16,7 +16,7 @@
 
         <Label Grid.Row="0" Content="Borrowed books" Margin="10"/>
 
-        <DataGrid Name="detailsGrid" Grid.Row="1" SelectionMode="Single" SelectionChanged="BooksDataGrid_SelectionChanged">
+        <DataGrid Name="booksGrid" Grid.Row="1" AutoGenerateColumns="False" SelectionMode="Single">
             <DataGrid.Columns>
                 <DataGridTextColumn Header="Id" IsReadOnly="True" Binding="{Binding Id}" Width="3*" />
                 <DataGridTextColumn Header="Title" IsReadOnly="True" Binding="{Binding Title}" Width="3*" />
@@ -28,7 +28,7 @@
         </DataGrid>
 
         <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-            <Button x:Name="AddMemberButton" Content="Close" Width="80" Margin="10" Click="CloseButton_Click"/>
+            <Button x:Name="CloseButton" Content="Close" Width="80" Margin="10" Click="CloseButtonClick"/>
         </StackPanel>
 
     </Grid>

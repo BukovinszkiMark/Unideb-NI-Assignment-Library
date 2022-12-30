@@ -5,57 +5,67 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Library_Client"
         mc:Ignorable="d"
-        Title="Library Client" Height="450" Width="800">
+        Title="Library Client" Height="450" Width="1200">
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="1*"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
-        
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
 
-            <Label Grid.Row="0" Content="Members" FontWeight="Bold" Margin="15, 15, 15, 0"/>
-
-            <DataGrid Name="membersGrid" Grid.Row="1" SelectionMode="Single" SelectionChanged="MembersDataGrid_SelectionChanged">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" IsReadOnly="True" Binding="{Binding Id}" Width="3*" />
-                    <DataGridTextColumn Header="Name" IsReadOnly="True" Binding="{Binding Name}" Width="3*" />
-                    <DataGridTextColumn Header="Address" IsReadOnly="True" Binding="{Binding Address}" Width="3*" />
-                    <DataGridTextColumn Header="DateOfBirth" IsReadOnly="True" Binding="{Binding DateOfBirth}" Width="3*" />
-                </DataGrid.Columns>
-            </DataGrid>
-
-            <Button Grid.Row="2" Content="Add member" Width="100" HorizontalAlignment="Right" Margin="15, 0, 15, 15" Click="AddMember_Click"/>
-
+        <Grid Grid.Row="0">
+            <Button Content="Reload Data" Width="100" HorizontalAlignment="Right" VerticalAlignment="Center" Click="ReloadButtonClick"/>
         </Grid>
         
-        <Grid Grid.Column="1">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
 
-            <Label Grid.Row="0" Content="Books" FontWeight="Bold" Margin="15, 15, 15, 0"/>
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-            <DataGrid Name="booksGrid" Grid.Row="1" SelectionMode="Single" SelectionChanged="BooksDataGrid_SelectionChanged">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Id" IsReadOnly="True" Binding="{Binding Id}" Width="3*" />
-                    <DataGridTextColumn Header="Title" IsReadOnly="True" Binding="{Binding Title}" Width="3*" />
-                    <DataGridTextColumn Header="Writer" IsReadOnly="True" Binding="{Binding Writer}" Width="3*" />
-                    <DataGridTextColumn Header="Publisher" IsReadOnly="True" Binding="{Binding Publisher}" Width="3*" />
-                    <DataGridTextColumn Header="Publish Year" IsReadOnly="True" Binding="{Binding PublishYear}" Width="3*" />
-                </DataGrid.Columns>
-            </DataGrid>
+                <Label Grid.Row="0" Content="Members" FontWeight="Bold" Margin="15, 15, 15, 0"/>
 
-            <Button Grid.Row="2" Content="Add book" Width="100" HorizontalAlignment="Right" Margin="15, 0, 15, 15" Click="AddBook_Click"/>
+                <DataGrid Name="membersGrid" Grid.Row="1" AutoGenerateColumns="False" SelectionMode="Single" SelectionChanged="MembersDataGridSelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Id" IsReadOnly="True" Binding="{Binding Id}" Width="3*" />
+                        <DataGridTextColumn Header="Name" IsReadOnly="True" Binding="{Binding Name}" Width="3*" />
+                        <DataGridTextColumn Header="Address" IsReadOnly="True" Binding="{Binding Address}" Width="3*" />
+                        <DataGridTextColumn Header="DateOfBirth" IsReadOnly="True" Binding="{Binding DateOfBirth}" Width="3*" />
+                    </DataGrid.Columns>
+                </DataGrid>
 
+                <Button Grid.Row="2" Content="Add member" Width="100" HorizontalAlignment="Right" Margin="15, 0, 15, 15" Click="AddMemberClick"/>
+
+            </Grid>
+
+            <Grid Grid.Column="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Grid.Row="0" Content="Books" FontWeight="Bold" Margin="15, 15, 15, 0"/>
+
+                <DataGrid Name="booksGrid" Grid.Row="1" AutoGenerateColumns="False" SelectionMode="Single" SelectionChanged="BooksDataGridSelectionChanged">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Id" IsReadOnly="True" Binding="{Binding Id}" Width="3*" />
+                        <DataGridTextColumn Header="Title" IsReadOnly="True" Binding="{Binding Title}" Width="3*" />
+                        <DataGridTextColumn Header="Writer" IsReadOnly="True" Binding="{Binding Writer}" Width="3*" />
+                        <DataGridTextColumn Header="Publisher" IsReadOnly="True" Binding="{Binding Publisher}" Width="3*" />
+                        <DataGridTextColumn Header="Publish Year" IsReadOnly="True" Binding="{Binding PublishYear}" Width="3*" />
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Grid>
         </Grid>
+    </Grid>
 
-  </Grid>
 </Window>

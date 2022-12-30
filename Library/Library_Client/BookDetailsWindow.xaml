@@ -25,20 +25,20 @@
             </Grid.RowDefinitions>
 
             <Label Grid.Column="0" Grid.Row="0" Content="Borrowed" Margin="10"/>
-            <Label Grid.Column="1" Grid.Row="0" Content="placeholderText" Margin="10"/>
+            <Label Name="borrowedText" Grid.Column="1" Grid.Row="0" Content="placeholderText" Margin="10"/>
 
             <Label Grid.Column="0" Grid.Row="1" Content="Borrowed by" Margin="10"/>
-            <Label Grid.Column="1" Grid.Row="1" Content="placeholderText" Margin="10"/>
+            <Label Name="borrowedByText" Grid.Column="1" Grid.Row="1" Content="placeholderText" Margin="10"/>
 
             <Label Grid.Column="0" Grid.Row="2" Content="Return date" Margin="10"/>
-            <Label Grid.Column="1" Grid.Row="2" Content="placeholderText" Margin="10"/>
+            <Label Name="returnDateText" Grid.Column="1" Grid.Row="2" Content="placeholderText" Margin="10"/>
 
         </Grid>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-            <Button x:Name="BorrowButton" Content="Borrow" Width="80" Margin="10" Click="BorrowButton_Click"/>
-            <Button x:Name="ReturnButton" Content="Return" Width="80" Margin="10" Click="ReturnButton_Click"/>
-            <Button x:Name="CloseButton" Content="Close" Width="80" Margin="10" Click="CloseButton_Click"/>
+            <Button x:Name="BorrowButton" Content="Borrow" Width="80" Margin="10" Click="BorrowButtonClick"/>
+            <Button x:Name="ReturnButton" Content="Return" Width="80" Margin="10" Click="ReturnButtonClick"/>
+            <Button x:Name="CloseButton" Content="Close" Width="80" Margin="10" Click="CloseButtonClick"/>
         </StackPanel>
         
     </Grid>

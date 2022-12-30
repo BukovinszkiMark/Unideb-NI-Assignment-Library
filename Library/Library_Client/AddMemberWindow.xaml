@@ -36,7 +36,8 @@
         </Grid>
 
         <StackPanel Grid.Row="1" Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Right">
-            <Button x:Name="CloseButton" Content="Close" Width="80" Margin="10" Click="CloseButton_Click"/>
+            <Button x:Name="CreateButton" Content="Create" Width="80" Margin="10" Click="CreateButtonClick"/>
+            <Button x:Name="CloseButton" Content="Close" Width="80" Margin="10" Click="CloseButtonClick"/>
         </StackPanel>
 
     </Grid>

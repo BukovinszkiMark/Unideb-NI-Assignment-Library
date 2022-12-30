@@ -8,8 +8,32 @@ namespace Library_Server.Repositories
 {
     public class BorrowRepository
     {
+        public static bool testDataAdded = false;
+        public static void AddTestData()
+        {
+            AddBorrow(new Borrow { MemberId=1 , BookId=17 , BorrowDate= DateTime.Parse("2022-12-25T06:25:00"), ReturnDate= DateTime.Parse("2023-02-25T06:25:00") });
+            AddBorrow(new Borrow { MemberId=2 , BookId=18 , BorrowDate= DateTime.Parse("2022-09-02T06:25:00"), ReturnDate= DateTime.Parse("2022-11-02T06:25:00") });
+            AddBorrow(new Borrow { MemberId=2 , BookId=19 , BorrowDate= DateTime.Parse("2022-12-23T06:25:00"), ReturnDate= DateTime.Parse("2023-02-23T06:25:00") });
+        }
+
         public static IList<Borrow> GetBorrows()
         {
+            if (!testDataAdded)
+            {
+                var borrows = new List<Borrow>();
+
+                using (var database = new LibraryContext())
+                {
+                    borrows = database.Borrows.ToList();
+                }
+
+                if (borrows.Count == 0)
+                {
+                    AddTestData();
+                    testDataAdded = true;
+                }
+            }
+
             using (var database = new LibraryContext())
             {
                 var borrows = database.Borrows.ToList();

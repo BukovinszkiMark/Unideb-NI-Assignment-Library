@@ -24,21 +24,23 @@ namespace Library_Server.Controllers
         {
             var borrow = BorrowRepository.GetBorrow(id);
 
-            if (borrow != null)
-            {
-                return Ok(borrow);
-            }
-            else
+            if (borrow == null)
             {
                 return NotFound();
             }
+         
+            return Ok(borrow);
         }
 
         [HttpPost]
         public ActionResult Post(Borrow borrow)
         {
-            BorrowRepository.AddBorrow(borrow);
+            if (!ValidateBorrow(borrow)) 
+            {
+                return ValidationProblem("Return date can only be a later date than the borrow date");
+            }
 
+            BorrowRepository.AddBorrow(borrow);
             return Ok();
         }
 
@@ -47,13 +49,19 @@ namespace Library_Server.Controllers
         {
             var dbBorrow = BorrowRepository.GetBorrow(id);
 
-            if (dbBorrow != null)
+            if (dbBorrow == null)
             {
-                BorrowRepository.UpdateBorrow(borrow);
-                return Ok();
+                return NotFound();
             }
 
-            return NotFound();
+            if (!ValidateBorrow(borrow))
+            {
+                return ValidationProblem("Return date can only be a later date than the borrow date");
+            }
+
+            BorrowRepository.UpdateBorrow(borrow);
+            return Ok();
+
         }
 
         [HttpDelete("{id}")]
@@ -68,6 +76,11 @@ namespace Library_Server.Controllers
             }
 
             return NotFound();
+        }
+
+        public bool ValidateBorrow(Borrow borrow) 
+        {
+            return borrow.ReturnDate > borrow.BorrowDate;
         }
     }
 }

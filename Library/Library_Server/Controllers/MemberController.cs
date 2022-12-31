@@ -37,8 +37,12 @@ namespace Library_Server.Controllers
         [HttpPost]
         public ActionResult Post(Member member)
         {
+            if (!ValidateMember(member))
+            {
+                return ValidationProblem("Name cannot be empty or whitespace and can only contain letters, remove any special characters.");
+            }
+
             MemberRepository.AddMember(member);
-            
             return Ok();
         }
 
@@ -47,13 +51,19 @@ namespace Library_Server.Controllers
         {
             var dbMember = MemberRepository.GetMember(id);
 
-            if (dbMember != null)
+            if (dbMember == null)
             {
-                MemberRepository.UpdateMember(member);
-                return Ok();
+                return NotFound();
             }
 
-            return NotFound();
+            if (!ValidateMember(member))
+            {
+                return ValidationProblem("Name cannot be empty or whitespace and can only contain letters, remove any special characters.");
+            }
+
+            MemberRepository.UpdateMember(member);
+            return Ok();
+
         }
 
         [HttpDelete("{id}")]
@@ -68,6 +78,21 @@ namespace Library_Server.Controllers
             }
 
             return NotFound();
+        }
+
+        public bool ValidateMember(Member member) 
+        {
+
+            if (member.Name.Replace(" ","").Length == 0) {
+                return false;
+            }
+
+            if (member.Name.Replace(" ", "").Any(c => !char.IsLetter(c)))
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

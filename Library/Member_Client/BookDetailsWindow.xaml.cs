@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Library_Client.DataProviders;
+using Library_Common.Models;
 
 namespace Member_Client
 {
@@ -19,9 +21,40 @@ namespace Member_Client
     /// </summary>
     public partial class BookDetailsWindow : Window
     {
-        public BookDetailsWindow()
+        Book currentBook;
+
+        public BookDetailsWindow(Book book)
         {
             InitializeComponent();
+
+            currentBook = book;
+
+            DisplayBookDetails(book);
         }
-    }
+
+        public void CloseButtonClick(object sender, RoutedEventArgs e)
+        {
+            DialogResult = true;
+            Close();
+        }
+
+        public void DisplayBookDetails(Book book)
+        {
+            Borrow borrow = MemberClientBorrowDataProvider.GetBorrows().Where(b => b.BookId == book.Id).FirstOrDefault();
+
+            if (borrow != null)
+            {
+                borrowedText.Content = "Yes";
+                borrowedByText.Content = MemberClientMemberDataProvider.GetMembers().Where(m => m.Id == borrow.MemberId).FirstOrDefault().Name;
+                returnDateText.Content = borrow.ReturnDate.ToString();
+            }
+            else
+            {
+                borrowedText.Content = "No";
+                borrowedByText.Content = "Not Borrowed";
+                returnDateText.Content = "Not Borrowed";
+            }
+        }
+
+   }
 }

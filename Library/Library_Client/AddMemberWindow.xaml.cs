@@ -43,7 +43,7 @@ namespace Library_Client
                 _member.Address = AddressTextBox.Text;
                 _member.DateOfBirth = DateOfBirthDatePicker.SelectedDate.Value;
 
-                MemberDataProvider.CreateMember(_member);
+                LibraryClientMemberDataProvider.CreateMember(_member);
 
                 DialogResult = true;
                 Close();

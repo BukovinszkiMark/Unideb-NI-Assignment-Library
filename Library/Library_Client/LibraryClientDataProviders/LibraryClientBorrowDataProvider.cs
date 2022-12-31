@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace Library_Client.DataProviders
 {
-    class BorrowDataProvider
+    class LibraryClientBorrowDataProvider
     {
         private const string _url = "http://localhost:5000/api/borrow";
 

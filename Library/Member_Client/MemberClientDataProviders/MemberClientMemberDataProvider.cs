@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace Library_Client.DataProviders
 {
-    class MemberDataProvider
+    class MemberClientMemberDataProvider
     {
         private const string _url = "http://localhost:5000/api/member";
 

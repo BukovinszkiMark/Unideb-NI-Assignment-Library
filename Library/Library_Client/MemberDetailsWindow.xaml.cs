@@ -37,7 +37,7 @@ namespace Library_Client
 
         private void UpdateBooksGrid(Member member)
         {
-            var borrows = BorrowDataProvider.GetBorrows().Where(b => b.MemberId == member.Id);
+            var borrows = LibraryClientBorrowDataProvider.GetBorrows().Where(b => b.MemberId == member.Id);
 
             List<long> bookIds = new List<long>();
             List<String> overdueList = new List<string>();
@@ -61,7 +61,7 @@ namespace Library_Client
 
             foreach (long id in bookIds) 
             {
-                Book book = BookDataProvider.GetBooks().Where(b => b.Id == id).FirstOrDefault();
+                Book book = LibraryClientBookDataProvider.GetBooks().Where(b => b.Id == id).FirstOrDefault();
 
                 books.Add(new BookWithOverdue(book, overdueList[counterForList]));
                 counterForList++;

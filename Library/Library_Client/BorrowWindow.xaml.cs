@@ -45,11 +45,11 @@ namespace Library_Client
             if (ValidateBorrow())
             {
                 _borrow.BookId = currentBook.Id;
-                _borrow.MemberId = MemberDataProvider.GetMembers().Where(m => m.Name == NameTextBox.Text).FirstOrDefault().Id;
+                _borrow.MemberId = LibraryClientMemberDataProvider.GetMembers().Where(m => m.Name == NameTextBox.Text).FirstOrDefault().Id;
                 _borrow.BorrowDate = DateTime.Now;
                 _borrow.ReturnDate = DateTime.Now.AddMonths(2);
 
-                BorrowDataProvider.CreateBorrow(_borrow);
+                LibraryClientBorrowDataProvider.CreateBorrow(_borrow);
 
                 DialogResult = true;
                 Close();
@@ -63,7 +63,7 @@ namespace Library_Client
                 MessageBox.Show("Name should not be empty.");
                 return false;
             }
-            if (MemberDataProvider.GetMembers().Where(m => m.Name == NameTextBox.Text).FirstOrDefault() == null) 
+            if (LibraryClientMemberDataProvider.GetMembers().Where(m => m.Name == NameTextBox.Text).FirstOrDefault() == null) 
             {
                 MessageBox.Show("Member Not found.");
                 return false;

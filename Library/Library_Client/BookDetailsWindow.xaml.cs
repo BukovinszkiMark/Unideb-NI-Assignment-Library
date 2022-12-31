@@ -40,12 +40,12 @@ namespace Library_Client
 
         public void DisplayBookDetails(Book book) 
         {
-            Borrow borrow = BorrowDataProvider.GetBorrows().Where(b => b.BookId == book.Id).FirstOrDefault();
+            Borrow borrow = LibraryClientBorrowDataProvider.GetBorrows().Where(b => b.BookId == book.Id).FirstOrDefault();
 
             if (borrow != null)
             {
                 borrowedText.Content = "Yes";
-                borrowedByText.Content = MemberDataProvider.GetMembers().Where(m => m.Id == borrow.MemberId).FirstOrDefault().Name;
+                borrowedByText.Content = LibraryClientMemberDataProvider.GetMembers().Where(m => m.Id == borrow.MemberId).FirstOrDefault().Name;
                 returnDateText.Content = borrow.ReturnDate.ToString();
 
                 BorrowButton.Visibility = Visibility.Collapsed;
@@ -71,7 +71,7 @@ namespace Library_Client
 
         public void ReturnButtonClick(object sender, RoutedEventArgs e)
         {
-            BorrowDataProvider.DeleteBorrow(BorrowDataProvider.GetBorrows().Where(b => b.BookId == currentBook.Id).FirstOrDefault().Id);
+            LibraryClientBorrowDataProvider.DeleteBorrow(LibraryClientBorrowDataProvider.GetBorrows().Where(b => b.BookId == currentBook.Id).FirstOrDefault().Id);
             DisplayBookDetails(currentBook);
         }
 

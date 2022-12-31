@@ -70,13 +70,13 @@ namespace Library_Client
 
         private void UpdateMembersGrid()
         {
-            var members = MemberDataProvider.GetMembers().ToList();
+            var members = LibraryClientMemberDataProvider.GetMembers().ToList();
             membersGrid.ItemsSource = members;
         }
 
         private void UpdateBooksGrid()
         {
-            var books = BookDataProvider.GetBooks().ToList();
+            var books = LibraryClientBookDataProvider.GetBooks().ToList();
             booksGrid.ItemsSource = books;
         }
 

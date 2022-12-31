@@ -1,18 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Library_Client.DataProviders;
 using Library_Common.Models;
+using LibraryClient.DataProviders;
+using LibraryCommon.Models;
 
 namespace Library_Client
 {
@@ -23,7 +16,7 @@ namespace Library_Client
     {
         private readonly Borrow _borrow;
 
-        private Book currentBook;
+        private Book _currentBook;
 
         public BorrowWindow(Book book)
         {
@@ -31,21 +24,21 @@ namespace Library_Client
 
             _borrow = new Borrow();
 
-            currentBook = book;
+            _currentBook = book;
         }
 
-        public void CloseButtonClick(object sender, RoutedEventArgs e) 
+        public void CloseButtonClick(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
             Close();
         }
 
-        public void BorrowButtonClick(object sender, RoutedEventArgs e) 
+        public void BorrowButtonClick(object sender, RoutedEventArgs e)
         {
             if (ValidateBorrow())
             {
-                _borrow.BookId = currentBook.Id;
-                _borrow.MemberId = LibraryClientMemberDataProvider.GetMembers().Where(m => m.Name == NameTextBox.Text).FirstOrDefault().Id;
+                _borrow.BookId = _currentBook.Id;
+                _borrow.MemberId = int.Parse(MemberIdTextBox.Text, CultureInfo.InvariantCulture);
                 _borrow.BorrowDate = DateTime.Now;
                 _borrow.ReturnDate = DateTime.Now.AddMonths(2);
 
@@ -56,14 +49,14 @@ namespace Library_Client
             }
         }
 
-        public bool ValidateBorrow() 
+        public bool ValidateBorrow()
         {
-            if (string.IsNullOrEmpty(NameTextBox.Text))
+            if (string.IsNullOrEmpty(MemberIdTextBox.Text))
             {
-                MessageBox.Show("Name should not be empty.");
+                MessageBox.Show("Member ID should not be empty.");
                 return false;
             }
-            if (LibraryClientMemberDataProvider.GetMembers().Where(m => m.Name == NameTextBox.Text).FirstOrDefault() == null) 
+            if (LibraryClientMemberDataProvider.GetMembers().Where(m => m.Id == int.Parse(MemberIdTextBox.Text, CultureInfo.InvariantCulture)).FirstOrDefault() == null)
             {
                 MessageBox.Show("Member Not found.");
                 return false;

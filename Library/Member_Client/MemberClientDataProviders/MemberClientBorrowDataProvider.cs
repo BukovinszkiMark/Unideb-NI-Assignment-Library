@@ -1,23 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using System.Globalization;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 using Library_Common.Models;
+using LibraryCommon.Models;
 using Newtonsoft.Json;
 
-namespace Library_Client.DataProviders
+namespace LibraryClient.DataProviders
 {
-    class MemberClientBorrowDataProvider
+    public static class MemberClientBorrowDataProvider
     {
-        private const string _url = "http://localhost:5000/api/borrow";
+        private static Uri _uniformResourceIdentifier = new Uri("http://localhost:5000/api/borrow");
 
         public static IEnumerable<Borrow> GetBorrows()
         {
             using (var client = new HttpClient())
             {
-                var response = client.GetAsync(_url).Result;
+                var response = client.GetAsync(_uniformResourceIdentifier).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -37,7 +37,7 @@ namespace Library_Client.DataProviders
                 var rawData = JsonConvert.SerializeObject(borrow);
                 var content = new StringContent(rawData, Encoding.UTF8, "application/json");
 
-                var response = client.PostAsync(_url, content).Result;
+                var response = client.PostAsync(_uniformResourceIdentifier, content).Result;
                 if (!response.IsSuccessStatusCode)
                 {
                     throw new InvalidOperationException(response.StatusCode.ToString());
@@ -49,7 +49,7 @@ namespace Library_Client.DataProviders
         {
             using (var client = new HttpClient())
             {
-                var response = client.DeleteAsync($"{_url}/{id}").Result;
+                var response = client.DeleteAsync(new Uri(_uniformResourceIdentifier.AbsoluteUri + "/" + id.ToString(CultureInfo.InvariantCulture))).Result;
                 if (!response.IsSuccessStatusCode)
                 {
                     throw new InvalidOperationException(response.StatusCode.ToString());

@@ -1,43 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Library_Client.DataProviders;
-using Library_Common.Models;
+using LibraryClient.DataProviders;
+using LibraryCommon.Models;
 
-namespace Member_Client
+namespace MemberClient
 {
     /// <summary>
     /// Interaction logic for BookDetailsWindow.xaml
     /// </summary>
     public partial class BookDetailsWindow : Window
     {
-        Book currentBook;
+        private Book _currentBook;
 
         public BookDetailsWindow(Book book)
         {
             InitializeComponent();
 
-            currentBook = book;
+            _currentBook = book;
 
             DisplayBookDetails(book);
         }
-
         public void CloseButtonClick(object sender, RoutedEventArgs e)
         {
             DialogResult = true;
             Close();
         }
-
         public void DisplayBookDetails(Book book)
         {
             Borrow borrow = MemberClientBorrowDataProvider.GetBorrows().Where(b => b.BookId == book.Id).FirstOrDefault();
@@ -46,7 +34,7 @@ namespace Member_Client
             {
                 borrowedText.Content = "Yes";
                 borrowedByText.Content = MemberClientMemberDataProvider.GetMembers().Where(m => m.Id == borrow.MemberId).FirstOrDefault().Name;
-                returnDateText.Content = borrow.ReturnDate.ToString();
+                returnDateText.Content = borrow.ReturnDate.ToString(CultureInfo.InvariantCulture);
             }
             else
             {
@@ -55,6 +43,5 @@ namespace Member_Client
                 returnDateText.Content = "Not Borrowed";
             }
         }
-
-   }
+    }
 }

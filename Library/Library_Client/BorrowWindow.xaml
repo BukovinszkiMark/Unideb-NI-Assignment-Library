@@ -15,7 +15,7 @@
 
         <Grid Grid.Row="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="200"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -24,8 +24,8 @@
                 <RowDefinition Height="auto"/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Column="0" Grid.Row="0" Content="Borrowed by" Margin="10"/>
-            <TextBox x:Name="NameTextBox" Grid.Column="1" Grid.Row="0" Margin="10" Text="Name"/>
+            <Label Grid.Column="0" Grid.Row="0" Content="Borrowed by (member ID)" Margin="10"/>
+            <TextBox x:Name="MemberIdTextBox" Grid.Column="1" Grid.Row="0" Margin="10" Text="Member ID"/>
 
         </Grid>
 

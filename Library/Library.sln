@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.33130.400
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library_Server", "Library_Server\Library_Server.csproj", "{E028204E-8FFD-4C61-8543-A826FC7806D8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryServer", "Library_Server\LibraryServer.csproj", "{E028204E-8FFD-4C61-8543-A826FC7806D8}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library_Common", "Library_Common\Library_Common.csproj", "{D2949B86-FBF6-41BA-9530-D765CFD19E42}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryCommon", "Library_Common\LibraryCommon.csproj", "{D2949B86-FBF6-41BA-9530-D765CFD19E42}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Library_Client", "Library_Client\Library_Client.csproj", "{F6AA0539-8AB8-4D46-AF9A-62C47B50FA2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LibraryClient", "Library_Client\LibraryClient.csproj", "{F6AA0539-8AB8-4D46-AF9A-62C47B50FA2E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Member_Client", "Member_Client\Member_Client.csproj", "{C957B1EF-E1C5-496C-AA91-3817AE03DDAA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MemberClient", "Member_Client\MemberClient.csproj", "{C957B1EF-E1C5-496C-AA91-3817AE03DDAA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library_Server.Tests", "Library_server.Tests\Library_Server.Tests.csproj", "{C7C0F92D-D3F6-421C-BA05-5355B2692CF7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraryServer.Tests", "Library_server.Tests\LibraryServer.Tests.csproj", "{C7C0F92D-D3F6-421C-BA05-5355B2692CF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

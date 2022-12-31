@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using Library_Common.Models;
 using Library_Server.Repositories;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +11,7 @@ namespace Library_Server.Controllers
     public class MemberController : ControllerBase
     {
         [HttpGet]
-        public ActionResult<IEnumerable<Member>> Get() 
+        public ActionResult<IEnumerable<Member>> Get()
         {
             var members = MemberRepository.GetMembers();
             return Ok(members);
@@ -28,7 +26,7 @@ namespace Library_Server.Controllers
             {
                 return Ok(member);
             }
-            else 
+            else
             {
                 return NotFound();
             }
@@ -63,7 +61,6 @@ namespace Library_Server.Controllers
 
             MemberRepository.UpdateMember(member);
             return Ok();
-
         }
 
         [HttpDelete("{id}")]
@@ -80,14 +77,14 @@ namespace Library_Server.Controllers
             return NotFound();
         }
 
-        public bool ValidateMember(Member member) 
+        public bool ValidateMember(Member member)
         {
-
-            if (member.Name.Replace(" ","").Length == 0) {
+            if (member.Name.Replace(" ", string.Empty).Length == 0)
+            {
                 return false;
             }
 
-            if (member.Name.Replace(" ", "").Any(c => !char.IsLetter(c)))
+            if (member.Name.Replace(" ", string.Empty).Any(c => !char.IsLetter(c)))
             {
                 return false;
             }

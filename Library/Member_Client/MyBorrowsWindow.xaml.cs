@@ -1,21 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using Library_Client.DataProviders;
 using Library_Common.Models;
-using Member_Client.MyBorrowsWindowBookWithReturnDateAndOverdue;
+using LibraryClient.DataProviders;
+using LibraryCommon.Models;
+using MemberClient.MyBorrowsWindowBookWithReturnDateAndOverdue;
 
-namespace Member_Client
+namespace MemberClient
 {
     /// <summary>
     /// Interaction logic for MyBorrowsWindow.xaml
@@ -41,7 +33,7 @@ namespace Member_Client
 
             List<long> bookIds = new List<long>();
             List<DateTime> returnDates = new List<DateTime>();
-            List<String> overdueList = new List<String>();
+            List<string> overdueList = new List<string>();
 
             foreach (Borrow borrow in borrows)
             {
@@ -74,8 +66,6 @@ namespace Member_Client
             books.Sort((p, q) => p.ReturnDate.CompareTo(q.ReturnDate));
 
             booksGrid.ItemsSource = books;
-
         }
-
     }
 }

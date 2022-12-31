@@ -1,16 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Library_Client.DataProviders;
 using Library_Common.Models;
 
@@ -21,7 +10,6 @@ namespace Library_Client
     /// </summary>
     public partial class AddMemberWindow : Window
     {
-
         private readonly Member _member;
 
         public AddMemberWindow()
@@ -56,13 +44,17 @@ namespace Library_Client
             Close();
         }
 
-
         private bool ValidateMember()
         {
             if (string.IsNullOrEmpty(NameTextBox.Text))
             {
                 MessageBox.Show("Name should not be empty.");
                 return false;
+            }
+
+            if (NameTextBox.Text.Replace(" ", string.Empty).Any(c => !char.IsLetter(c)))
+            {
+                MessageBox.Show("Name can only contain letters, remove any special characters.");
             }
 
             if (string.IsNullOrEmpty(AddressTextBox.Text))

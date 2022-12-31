@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Library_Common.Models
+namespace LibraryCommon.Models
 {
     public class Borrow
     {
@@ -13,6 +9,5 @@ namespace Library_Common.Models
         public long MemberId { get; set; }
         public DateTime BorrowDate { get; set; }
         public DateTime ReturnDate { get; set; }
-
     }
 }

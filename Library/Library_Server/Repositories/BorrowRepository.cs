@@ -1,24 +1,31 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-using System.Threading.Tasks;
 using Library_Common.Models;
+using Library_Server.Repositories;
+using LibraryCommon.Models;
 
-namespace Library_Server.Repositories
+namespace LibraryServer.Repositories
 {
-    public class BorrowRepository
+    public static class BorrowRepository
     {
-        public static bool testDataAdded = false;
+        private static bool _testDataAdded = false;
         public static void AddTestData()
         {
-            AddBorrow(new Borrow { MemberId=1 , BookId=17 , BorrowDate= DateTime.Parse("2022-12-25T06:25:00"), ReturnDate= DateTime.Parse("2023-02-25T06:25:00") });
-            AddBorrow(new Borrow { MemberId=2 , BookId=18 , BorrowDate= DateTime.Parse("2022-09-02T06:25:00"), ReturnDate= DateTime.Parse("2022-11-02T06:25:00") });
-            AddBorrow(new Borrow { MemberId=2 , BookId=19 , BorrowDate= DateTime.Parse("2022-12-23T06:25:00"), ReturnDate= DateTime.Parse("2023-02-23T06:25:00") });
+            AddBorrow(new Borrow { MemberId = MemberRepository.GetMembers()[0].Id, BookId = BookRepository.GetBooks()[0].Id, BorrowDate = DateTime.Parse("2022-12-25T06:25:00", CultureInfo.InvariantCulture), ReturnDate = DateTime.Parse("2023-02-25T06:25:00", CultureInfo.InvariantCulture) });
+            AddBorrow(new Borrow { MemberId = MemberRepository.GetMembers()[1].Id, BookId = BookRepository.GetBooks()[1].Id, BorrowDate = DateTime.Parse("2022-09-02T06:25:00", CultureInfo.InvariantCulture), ReturnDate = DateTime.Parse("2022-11-02T06:25:00", CultureInfo.InvariantCulture) });
+            AddBorrow(new Borrow { MemberId = MemberRepository.GetMembers()[1].Id, BookId = BookRepository.GetBooks()[2].Id, BorrowDate = DateTime.Parse("2022-11-23T06:25:00", CultureInfo.InvariantCulture), ReturnDate = DateTime.Parse("2023-01-23T06:25:00", CultureInfo.InvariantCulture) });
+            AddBorrow(new Borrow { MemberId = MemberRepository.GetMembers()[1].Id, BookId = BookRepository.GetBooks()[3].Id, BorrowDate = DateTime.Parse("2021-12-23T06:25:00", CultureInfo.InvariantCulture), ReturnDate = DateTime.Parse("2022-02-23T06:25:00", CultureInfo.InvariantCulture) });
+            AddBorrow(new Borrow { MemberId = MemberRepository.GetMembers()[1].Id, BookId = BookRepository.GetBooks()[4].Id, BorrowDate = DateTime.Parse("2000-12-23T06:25:00", CultureInfo.InvariantCulture), ReturnDate = DateTime.Parse("2001-02-23T06:25:00", CultureInfo.InvariantCulture) });
+            AddBorrow(new Borrow { MemberId = MemberRepository.GetMembers()[1].Id, BookId = BookRepository.GetBooks()[5].Id, BorrowDate = DateTime.Parse("2022-12-23T06:25:00", CultureInfo.InvariantCulture), ReturnDate = DateTime.Parse("2023-02-23T06:25:00", CultureInfo.InvariantCulture) });
+            AddBorrow(new Borrow { MemberId = MemberRepository.GetMembers()[2].Id, BookId = BookRepository.GetBooks()[6].Id, BorrowDate = DateTime.Parse("2022-12-23T06:25:00", CultureInfo.InvariantCulture), ReturnDate = DateTime.Parse("2023-02-23T06:25:00", CultureInfo.InvariantCulture) });
+            AddBorrow(new Borrow { MemberId = MemberRepository.GetMembers()[3].Id, BookId = BookRepository.GetBooks()[7].Id, BorrowDate = DateTime.Parse("2022-12-23T06:25:00", CultureInfo.InvariantCulture), ReturnDate = DateTime.Parse("2023-02-23T06:25:00", CultureInfo.InvariantCulture) });
         }
 
         public static IList<Borrow> GetBorrows()
         {
-            if (!testDataAdded)
+            if (!_testDataAdded)
             {
                 var borrows = new List<Borrow>();
 
@@ -30,7 +37,7 @@ namespace Library_Server.Repositories
                 if (borrows.Count == 0)
                 {
                     AddTestData();
-                    testDataAdded = true;
+                    _testDataAdded = true;
                 }
             }
 
@@ -42,7 +49,7 @@ namespace Library_Server.Repositories
             }
         }
 
-        public static Borrow GetBorrow(long id) 
+        public static Borrow GetBorrow(long id)
         {
             using (var database = new LibraryContext())
             {
@@ -52,7 +59,7 @@ namespace Library_Server.Repositories
             }
         }
 
-        public static void AddBorrow(Borrow borrow) 
+        public static void AddBorrow(Borrow borrow)
         {
             using (var database = new LibraryContext())
             {

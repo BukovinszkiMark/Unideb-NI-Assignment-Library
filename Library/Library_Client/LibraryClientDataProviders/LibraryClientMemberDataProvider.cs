@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
 using Library_Common.Models;
 using Newtonsoft.Json;
 
 namespace Library_Client.DataProviders
 {
-    class LibraryClientMemberDataProvider
+    public static class LibraryClientMemberDataProvider
     {
-        private const string _url = "http://localhost:5000/api/member";
+        private static Uri _uniformResourceIdentifier = new Uri("http://localhost:5000/api/member");
 
         public static IEnumerable<Member> GetMembers()
         {
             using (var client = new HttpClient())
             {
-                var response = client.GetAsync(_url).Result;
+                var response = client.GetAsync(_uniformResourceIdentifier).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -37,13 +35,12 @@ namespace Library_Client.DataProviders
                 var rawData = JsonConvert.SerializeObject(member);
                 var content = new StringContent(rawData, Encoding.UTF8, "application/json");
 
-                var response = client.PostAsync(_url, content).Result;
+                var response = client.PostAsync(_uniformResourceIdentifier, content).Result;
                 if (!response.IsSuccessStatusCode)
                 {
                     throw new InvalidOperationException(response.StatusCode.ToString());
                 }
             }
         }
-
     }
 }

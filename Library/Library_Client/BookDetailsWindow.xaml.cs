@@ -1,18 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Globalization;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Library_Client.DataProviders;
 using Library_Common.Models;
+using LibraryClient.DataProviders;
+using LibraryCommon.Models;
 
 namespace Library_Client
 {
@@ -21,13 +13,13 @@ namespace Library_Client
     /// </summary>
     public partial class BookDetailsWindow : Window
     {
-        Book currentBook;
+        private Book _currentBook;
 
         public BookDetailsWindow(Book book)
         {
             InitializeComponent();
 
-            currentBook = book; 
+            _currentBook = book;
 
             DisplayBookDetails(book);
         }
@@ -38,7 +30,7 @@ namespace Library_Client
             Close();
         }
 
-        public void DisplayBookDetails(Book book) 
+        public void DisplayBookDetails(Book book)
         {
             Borrow borrow = LibraryClientBorrowDataProvider.GetBorrows().Where(b => b.BookId == book.Id).FirstOrDefault();
 
@@ -46,11 +38,11 @@ namespace Library_Client
             {
                 borrowedText.Content = "Yes";
                 borrowedByText.Content = LibraryClientMemberDataProvider.GetMembers().Where(m => m.Id == borrow.MemberId).FirstOrDefault().Name;
-                returnDateText.Content = borrow.ReturnDate.ToString();
+                returnDateText.Content = borrow.ReturnDate.ToString(CultureInfo.InvariantCulture);
 
                 BorrowButton.Visibility = Visibility.Collapsed;
             }
-            else 
+            else
             {
                 borrowedText.Content = "No";
                 borrowedByText.Content = "Not Borrowed";
@@ -60,20 +52,19 @@ namespace Library_Client
             }
         }
 
-        public void BorrowButtonClick(object sender, RoutedEventArgs e) 
+        public void BorrowButtonClick(object sender, RoutedEventArgs e)
         {
-            var window = new BorrowWindow(currentBook);
+            var window = new BorrowWindow(_currentBook);
             if (window.ShowDialog() ?? false)
             {
-                DisplayBookDetails(currentBook);
+                DisplayBookDetails(_currentBook);
             }
         }
 
         public void ReturnButtonClick(object sender, RoutedEventArgs e)
         {
-            LibraryClientBorrowDataProvider.DeleteBorrow(LibraryClientBorrowDataProvider.GetBorrows().Where(b => b.BookId == currentBook.Id).FirstOrDefault().Id);
-            DisplayBookDetails(currentBook);
+            LibraryClientBorrowDataProvider.DeleteBorrow(LibraryClientBorrowDataProvider.GetBorrows().Where(b => b.BookId == _currentBook.Id).FirstOrDefault().Id);
+            DisplayBookDetails(_currentBook);
         }
-
     }
 }

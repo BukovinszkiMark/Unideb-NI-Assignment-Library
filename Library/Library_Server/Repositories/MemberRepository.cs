@@ -1,24 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
-using System.Threading.Tasks;
 using Library_Common.Models;
 
 namespace Library_Server.Repositories
 {
-    public class MemberRepository
+    public static class MemberRepository
     {
-        public static bool testDataAdded = false;
+        private static bool _testDataAdded = false;
         public static void AddTestData()
         {
-            AddMember(new Member { Name= "Richard Flake", Address= "Louisville, KY 40018-1234", DateOfBirth= DateTime.Parse("2002-12-05T06:25:00") });
-            AddMember(new Member { Name="Hann Gothe", Address= "Nashville, TN 37011-5678", DateOfBirth= DateTime.Parse("2002-11-05T07:15:00") });
-            AddMember(new Member { Name="Jonh Anderson", Address= "APO, AA 33608-1234", DateOfBirth= DateTime.Parse("2008-10-05T07:25:00") });
+            AddMember(new Member { Name = "Richard Flake", Address = "Louisville, KY 40018-1234", DateOfBirth = DateTime.Parse("2002-12-05T06:25:00", CultureInfo.InvariantCulture) });
+            AddMember(new Member { Name = "Hann Gothe", Address = "Nashville, TN 37011-5678", DateOfBirth = DateTime.Parse("2002-11-05T07:15:00", CultureInfo.InvariantCulture) });
+            AddMember(new Member { Name = "Jonh Anderson", Address = "APO, AA 33608-1234", DateOfBirth = DateTime.Parse("2008-10-05T07:25:00", CultureInfo.InvariantCulture) });
+            AddMember(new Member { Name = "TestName1", Address = "TestAddress1", DateOfBirth = DateTime.Parse("2008-10-05T07:25:00", CultureInfo.InvariantCulture) });
+            AddMember(new Member { Name = "TestName2", Address = "TestAddress2", DateOfBirth = DateTime.Parse("2009-10-05T07:25:00", CultureInfo.InvariantCulture) });
+            AddMember(new Member { Name = "TestName3", Address = "TestAddress3", DateOfBirth = DateTime.Parse("2010-10-05T07:25:00", CultureInfo.InvariantCulture) });
+            AddMember(new Member { Name = "TestName4", Address = "TestAddress4", DateOfBirth = DateTime.Parse("2011-10-05T07:25:00", CultureInfo.InvariantCulture) });
         }
 
-        public static IList<Member> GetMembers() 
+        public static IList<Member> GetMembers()
         {
-            if (!testDataAdded)
+            if (!_testDataAdded)
             {
                 var members = new List<Member>();
 
@@ -30,11 +34,11 @@ namespace Library_Server.Repositories
                 if (members.Count == 0)
                 {
                     AddTestData();
-                    testDataAdded = true;
+                    _testDataAdded = true;
                 }
             }
 
-            using (var database = new LibraryContext()) 
+            using (var database = new LibraryContext())
             {
                 var members = database.Members.ToList();
 
@@ -42,7 +46,7 @@ namespace Library_Server.Repositories
             }
         }
 
-        public static Member GetMember(long id) 
+        public static Member GetMember(long id)
         {
             using (var database = new LibraryContext())
             {

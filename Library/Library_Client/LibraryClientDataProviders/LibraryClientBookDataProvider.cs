@@ -1,23 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using Library_Common.Models;
+using LibraryCommon.Models;
 using Newtonsoft.Json;
 
-namespace Library_Client.DataProviders
+namespace LibraryClient.DataProviders
 {
-    class LibraryClientBookDataProvider
+    public static class LibraryClientBookDataProvider
     {
-        private const string _url = "http://localhost:5000/api/book";
+        private static Uri _uniformResourceIdentifier = new Uri("http://localhost:5000/api/book");
 
         public static IEnumerable<Book> GetBooks()
         {
             using (var client = new HttpClient())
             {
-                var response = client.GetAsync(_url).Result;
+                var response = client.GetAsync(_uniformResourceIdentifier).Result;
 
                 if (response.IsSuccessStatusCode)
                 {
@@ -29,6 +27,5 @@ namespace Library_Client.DataProviders
                 throw new InvalidOperationException(response.StatusCode.ToString());
             }
         }
-
     }
 }

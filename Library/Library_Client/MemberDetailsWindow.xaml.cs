@@ -1,19 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Library_Client.DataProviders;
 using Library_Client.MemberDetailsWindowBookWithOverdue;
 using Library_Common.Models;
+using LibraryClient.DataProviders;
+using LibraryCommon.Models;
 
 namespace Library_Client
 {
@@ -26,7 +19,7 @@ namespace Library_Client
         {
             InitializeComponent();
 
-            UpdateBooksGrid(member);            
+            UpdateBooksGrid(member);
         }
 
         public void CloseButtonClick(object sender, RoutedEventArgs e)
@@ -40,9 +33,9 @@ namespace Library_Client
             var borrows = LibraryClientBorrowDataProvider.GetBorrows().Where(b => b.MemberId == member.Id);
 
             List<long> bookIds = new List<long>();
-            List<String> overdueList = new List<string>();
+            List<string> overdueList = new List<string>();
 
-            foreach (Borrow borrow in borrows) 
+            foreach (Borrow borrow in borrows)
             {
                 bookIds.Add(borrow.BookId);
 
@@ -50,7 +43,8 @@ namespace Library_Client
                 {
                     overdueList.Add("Yes");
                 }
-                else {
+                else
+                {
                     overdueList.Add("No");
                 }
             }
@@ -59,7 +53,7 @@ namespace Library_Client
 
             int counterForList = 0;
 
-            foreach (long id in bookIds) 
+            foreach (long id in bookIds)
             {
                 Book book = LibraryClientBookDataProvider.GetBooks().Where(b => b.Id == id).FirstOrDefault();
 
@@ -68,8 +62,6 @@ namespace Library_Client
             }
 
             booksGrid.ItemsSource = books;
-
         }
-
     }
 }

@@ -13,7 +13,7 @@ namespace Library_server.Tests
         {
             // Arrange
             MemberController memberController = new MemberController();
-            Member member = new Member { Id=0, Address="anyString", DateOfBirth= DateTime.Parse("2000-10-25T06:25:00"), Name="Roberts? Hays" };
+            Member member = new Member { Id = 0, Address = "anyString", DateOfBirth = DateTime.Parse("2000-10-25T06:25:00"), Name = "Roberts? Hays" };
 
             // Act
             bool result = memberController.ValidateMember(member);

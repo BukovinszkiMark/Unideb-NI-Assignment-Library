@@ -1,21 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Library_Client.DataProviders;
 using Library_Common.Models;
+using LibraryClient.DataProviders;
+using LibraryCommon.Models;
 
-namespace Member_Client
+namespace MemberClient
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -27,36 +17,33 @@ namespace Member_Client
             InitializeComponent();
         }
 
-        public void BorrowableGridSelectionChanged(object sender, SelectionChangedEventArgs args)
+        public void BooksGridSelectionChanged(object sender, SelectionChangedEventArgs arguments)
         {
-            var selectedBook = BorrowableGrid.SelectedItem as Book;
+            var selectedBook = BooksGrid.SelectedItem as Book;
 
             if (selectedBook != null)
             {
                 var window = new BookDetailsWindow(selectedBook);
                 window.ShowDialog();
 
-                BorrowableGrid.UnselectAll();
+                BooksGrid.UnselectAll();
             }
         }
 
-        public void MyBorrowsButtonClick(object sender, RoutedEventArgs args)
+        public void MyBorrowsButtonClick(object sender, RoutedEventArgs arguments)
         {
-
-            if (ValidateName()) 
+            if (ValidateName())
             {
                 Member member = MemberClientMemberDataProvider.GetMembers().Where(m => m.Name == NameTextBox.Text).FirstOrDefault();
                 var window = new MyBorrowsWindow(member);
                 window.ShowDialog();
 
-                BorrowableGrid.UnselectAll();
+                BooksGrid.UnselectAll();
             }
-
         }
 
-        private bool ValidateName() 
+        private bool ValidateName()
         {
-            
             if (string.IsNullOrEmpty(NameTextBox.Text))
             {
                 MessageBox.Show("Name should not be empty.");
@@ -72,20 +59,17 @@ namespace Member_Client
             }
 
             return true;
-
         }
 
         private void UpdateBooksGrid()
         {
             var books = MemberClientBookDataProvider.GetBooks().ToList();
-            BorrowableGrid.ItemsSource = books;
+            BooksGrid.ItemsSource = books;
         }
 
-        public void ReloadButtonClick(object sender, RoutedEventArgs args)
+        public void ReloadButtonClick(object sender, RoutedEventArgs arguments)
         {
             UpdateBooksGrid();
         }
-
     }
-
 }

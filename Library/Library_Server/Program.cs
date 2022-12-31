@@ -1,23 +1,17 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 
 namespace Library_Server
 {
-    public class Program
+    public static class Program
     {
-        public static void Main(string[] args)
+        public static void Main(string[] arguments)
         {
-            CreateHostBuilder(args).Build().Run();
+            CreateHostBuilder(arguments).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)
+        public static IHostBuilder CreateHostBuilder(string[] arguments) =>
+            Host.CreateDefaultBuilder(arguments)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();

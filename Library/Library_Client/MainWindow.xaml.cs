@@ -1,19 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using Library_Client.DataProviders;
 using Library_Common.Models;
+using LibraryClient.DataProviders;
+using LibraryCommon.Models;
 
 namespace Library_Client
 {
@@ -27,7 +18,7 @@ namespace Library_Client
             InitializeComponent();
         }
 
-        public void MembersDataGridSelectionChanged(object sender, SelectionChangedEventArgs args) 
+        public void MembersDataGridSelectionChanged(object sender, SelectionChangedEventArgs arguments)
         {
             var selectedMember = membersGrid.SelectedItem as Member;
 
@@ -43,7 +34,7 @@ namespace Library_Client
             }
         }
 
-        public void AddMemberClick(object sender, RoutedEventArgs args)
+        public void AddMemberClick(object sender, RoutedEventArgs arguments)
         {
             var window = new AddMemberWindow();
             if (window.ShowDialog() ?? false)
@@ -52,7 +43,7 @@ namespace Library_Client
             }
         }
 
-        public void BooksDataGridSelectionChanged(object sender, SelectionChangedEventArgs args)
+        public void BooksDataGridSelectionChanged(object sender, SelectionChangedEventArgs arguments)
         {
             var selectedBook = booksGrid.SelectedItem as Book;
 
@@ -80,12 +71,11 @@ namespace Library_Client
             booksGrid.ItemsSource = books;
         }
 
-        public void ReloadButtonClick(object sender, RoutedEventArgs args)
+        public void ReloadButtonClick(object sender, RoutedEventArgs arguments)
         {
             UpdateMembersGrid();
 
             UpdateBooksGrid();
         }
-
     }
 }

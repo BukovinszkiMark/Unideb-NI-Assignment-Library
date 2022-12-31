@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Library_Common.Models;
 using Library_Server.Repositories;
+using LibraryCommon.Models;
+using LibraryServer.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library_Server.Controllers
@@ -28,14 +27,14 @@ namespace Library_Server.Controllers
             {
                 return NotFound();
             }
-         
+
             return Ok(borrow);
         }
 
         [HttpPost]
         public ActionResult Post(Borrow borrow)
         {
-            if (!ValidateBorrow(borrow)) 
+            if (!ValidateBorrow(borrow))
             {
                 return ValidationProblem("Return date can only be a later date than the borrow date");
             }
@@ -61,7 +60,6 @@ namespace Library_Server.Controllers
 
             BorrowRepository.UpdateBorrow(borrow);
             return Ok();
-
         }
 
         [HttpDelete("{id}")]
@@ -78,7 +76,7 @@ namespace Library_Server.Controllers
             return NotFound();
         }
 
-        public bool ValidateBorrow(Borrow borrow) 
+        public bool ValidateBorrow(Borrow borrow)
         {
             return borrow.ReturnDate > borrow.BorrowDate;
         }

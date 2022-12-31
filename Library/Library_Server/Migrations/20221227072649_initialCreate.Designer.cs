@@ -11,7 +11,7 @@ namespace Library_Server.Migrations
 {
     [DbContext(typeof(LibraryContext))]
     [Migration("20221227072649_initialCreate")]
-    partial class initialCreate
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Library_Common.Models;
+using LibraryCommon.Models;
 
-namespace Member_Client.MyBorrowsWindowBookWithReturnDateAndOverdue
+namespace MemberClient.MyBorrowsWindowBookWithReturnDateAndOverdue
 {
-    class BookWithReturnDateAndOverdue
+    public class BookWithReturnDateAndOverdue
     {
         public long Id { get; set; }
         public string Title { get; set; }
@@ -15,9 +11,9 @@ namespace Member_Client.MyBorrowsWindowBookWithReturnDateAndOverdue
         public string Publisher { get; set; }
         public int PublishYear { get; set; }
         public DateTime ReturnDate { get; set; }
-        public String Overdue { get; set; }
+        public string Overdue { get; set; }
 
-        public BookWithReturnDateAndOverdue(Book book, DateTime returnDate, String overdue) 
+        public BookWithReturnDateAndOverdue(Book book, DateTime returnDate, string overdue)
         {
             Id = book.Id;
             Title = book.Title;
@@ -27,7 +23,5 @@ namespace Member_Client.MyBorrowsWindowBookWithReturnDateAndOverdue
             ReturnDate = returnDate;
             Overdue = overdue;
         }
-
     }
-
 }

@@ -1,6 +1,7 @@
 using System;
 using Library_Common.Models;
 using Library_Server.Controllers;
+using LibraryCommon.Models;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace Library_server.Tests
@@ -35,6 +36,5 @@ namespace Library_server.Tests
             // Assert
             Assert.AreEqual(true, result);
         }
-
     }
 }
